@@ -1,0 +1,13 @@
+.album-track {
+  display: flex;
+  align-items: top;
+  margin-top: 1em;
+}
+
+.album-track p {
+  padding-left: 0.5em;
+}
+
+.albums {
+  display: grid;
+}

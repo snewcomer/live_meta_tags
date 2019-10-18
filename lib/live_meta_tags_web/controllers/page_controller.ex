@@ -1,7 +1,10 @@
 defmodule LiveMetaTagsWeb.PageController do
   use LiveMetaTagsWeb, :controller
 
+  alias LiveMetaTags.Library
+
   def index(conn, _params) do
-    render(conn, "index.html")
+    albums = Library.list_albums()
+    render(conn, "index.html", albums: albums)
   end
 end

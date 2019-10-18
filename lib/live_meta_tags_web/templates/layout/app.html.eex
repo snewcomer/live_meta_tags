@@ -4,7 +4,42 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>LiveMetaTags · Phoenix Framework</title>
+
+    <link rel="canonical" href="<%= current_url(@conn) %>">
+
+    <title><%= title(assigns) %></title>
+    <meta name="description" content="<%= description(assigns) %>">
+    <meta name="copyright" content="Musicc">
+
+    <meta name="twitter:title" content="<%= title(assigns) %>">
+    <meta name="twitter:description" content="<%= description(assigns) %>">
+    <meta property="twitter:url" content="<%= current_url(@conn) %>">
+    <meta property="twitter:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@musicc">
+    <meta property="twitter:url" content="<%= current_url(@conn) %>">
+    <meta name="twitter:image" content="<%= twitter_img() %>">
+
+    <meta name="twitter:title" content="<%= title(assigns) %>">
+    <meta name="og:description" content="<%= description(assigns) %>">
+    <meta property="og:url" content="<%= current_url(@conn) %>">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="<%= fb_img() %>">
+    <meta property="og:image:width" content="<%= fb_image_width(assigns) %>">
+    <meta property="og:image:height" content="<%= fb_image_height(assigns) %>">
+    <meta property="og:site_name" content="Musicc">
+    <meta property="og:locale" content="en_GB">
+
+    <%= if is_album(assigns) do %>
+      <%= for track <- @album.tracks do %>
+        <meta property="music:song" content="<%= track.url %>">
+        <meta property="music:song:disc" content="<%= track.id %>">
+        <meta property="music:song:track" content="<%= track.id %>">
+      <% end %>
+
+      <%= album_schema(@album) %>
+    <% end %>
+
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>

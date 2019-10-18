@@ -17,6 +17,8 @@ defmodule LiveMetaTagsWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/albums", AlbumController
+    resources "/tracks", TrackController
   end
 
   # Other scopes may use custom stacks.
