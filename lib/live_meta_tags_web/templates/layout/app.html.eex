@@ -37,7 +37,28 @@
         <meta property="music:song:track" content="<%= track.id %>">
       <% end %>
 
-      <%= album_schema(@album) %>
+      <script name="schema:music-album" type="application/ld+json">
+        {
+          "@context": "http://schema.org",
+          "@type": "MusicAlbum",
+          "name": "<%= @album.title %>",
+          "description": "<%= @album.description %>",
+          "tracks": [
+            <%= for track <- @album.tracks do %>
+              {
+                "@type": "MusicRecording",
+                "name": "<%= track.name %>",
+                "audio": {"@type":"AudioObject"},
+                "offers": {
+                  "@type": "Offer",
+                  "price": "<%= track.price %>"
+                },
+                "duration": "<%= track.duration %>"
+              }
+            <% end %>
+          ]
+        }
+      </script>
     <% end %>
 
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
